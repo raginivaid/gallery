@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { GalleryImage } from './models/galleryImage.model';
+import { GalleryImage } from '../models/galleryImage.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseApp } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -18,11 +18,18 @@ export class ImageService {
   {
   this.uid = auth.uid;
   }
-  )}; 
- }
+  }); 
+ };
 
  getImages(): Observable<GalleryImage[]>
  {
  	return this.db.list('uploads');
  }
+
+ getImage(key: string)
+ {
+    return firebase.database().ref('uploads/' + key).once('value')
+    .then((snap) => snap.val());
+ }
+
 }

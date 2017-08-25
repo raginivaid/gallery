@@ -1,3 +1,8 @@
-<p>
-  image-detail works!
-</p>
+<div class="row">
+  <div class=col-md-12>
+    <div [ngStyle]="{'background-image':'url('+ imageUrl +')'}" 
+      class="img-container">
+    </div>
+    <button class="btn btn-primary"><a href="imageUrl" download="imageUrl" target="_blank"></a>Download Image</button>
+  </div>
+</div>

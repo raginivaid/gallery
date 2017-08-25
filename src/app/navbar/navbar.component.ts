@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthenticationService } from '../services/authentication.service';
+
+import { Router } from '@angular/router';
+
+import * as firebase from 'firebase/app';
+
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,9 +15,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  title: 'Gallery';
+  user: Observable<firebase.User>;
+
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
+  this.user = this.authService.authUser();
+  }
+
+  logOut()
+  {
+  	this.authService.logout().then(onResolve => this.router.navigate['/']);
   }
 
 }
